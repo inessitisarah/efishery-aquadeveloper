@@ -12,6 +12,8 @@ type IUserUseCase interface {
 	CreateUser(user response.CreateUserRequest) error
 	GetListUser() ([]response.GetUserResponse, error)
 	DeleteUser(id int) error
+	UpdateUser(id int) error
+
 }
 
 type UserUseCase struct {
