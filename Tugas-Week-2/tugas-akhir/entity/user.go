@@ -10,7 +10,7 @@ type Product struct {
 
 type Cart struct {
 	ID        int64 `json:"id" gorm:"column:id;type:bignit;primaryKey:autoIncrement"`
-	ProductID int   `json:"product_id"`
+	ProductID int   `json:"product_id"gorm:"references:`
 }
 type Payment struct {
 	ID     int64 `json:"id" gorm:"column:id;type:bignit;primaryKey:autoIncrement"`
