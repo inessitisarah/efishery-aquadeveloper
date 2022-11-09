@@ -1,8 +1,10 @@
 package handler
 
 import (
+	"mymodule/entity"
 	"mymodule/entity/response"
 	"mymodule/usecase"
+
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"

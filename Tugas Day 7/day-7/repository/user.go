@@ -30,6 +30,13 @@ func (u UserRepository) Create(user entity.User) error {
 	return nil
 }
 
+func (repo UserRepository) Update(user entity.User) (entity.User, error) {
+	if err := repo.db.Debug().Save(&user).Error; err != nil {
+		return entity.User{}, err
+	}
+	return user, nil
+}
+
 func (repo UserRepository) Delete(id int) error {
 	if err := repo.db.Debug().Delete(&entity.User{}, id).Error; err != nil {
 		return err
@@ -51,11 +58,4 @@ func (u UserRepository) GetAll() ([]entity.User, error) {
 		return nil, nil
 	}
 	return users, nil
-}
-
-func (repo UserRepository) Update(user entity.User) (entity.User, error) {
-	if err := repo.db.Debug().Save(&user).Error; err != nil {
-		return entity.User{}, err
-	}
-	return user, nil
 }
