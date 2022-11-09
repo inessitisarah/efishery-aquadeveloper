@@ -82,9 +82,9 @@ func (h UserHandler) DeleteUser(ctx *fiber.Ctx) error {
 	})
 }
 
-/* func (handler UserHandler) UpdateUser(ctx *fiber.Ctx) error {
+func (handler UserHandler) UpdateUser(ctx *fiber.Ctx) error {
 	userId, _ := strconv.Atoi(ctx.Params("id"))
-	userRequest := models.UpdateUserRequest{}
+	userRequest := entity.UpdateUserRequest{}
 	if err := ctx.BodyParser(&userRequest); err != nil {
 		return ctx.Status(fiber.StatusBadRequest).JSON(response.BaseResponse{
 			Code:    fiber.StatusBadRequest,
@@ -92,7 +92,7 @@ func (h UserHandler) DeleteUser(ctx *fiber.Ctx) error {
 			Data:    nil,
 		})
 	}
-	user, err := handler.userService.UpdateUser(userRequest, userId)
+	user, err := handler.userUsecase.UpdateUser(userRequest, userId)
 	if err != nil {
 		return ctx.Status(fiber.StatusBadRequest).JSON(response.BaseResponse{
 			Code:    fiber.StatusBadRequest,
@@ -105,4 +105,4 @@ func (h UserHandler) DeleteUser(ctx *fiber.Ctx) error {
 		Message: "Update user successfully",
 		Data:    user,
 	})
-} */
+}
