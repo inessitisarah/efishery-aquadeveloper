@@ -12,7 +12,6 @@ type IUserRepository interface {
 	GetAll() ([]entity.User, error)
 	FindById(id int) (entity.User, error)
 	Update(entity.User) (entity.User, error)
-
 }
 
 type UserRepository struct {
