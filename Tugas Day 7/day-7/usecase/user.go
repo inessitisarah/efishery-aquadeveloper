@@ -13,7 +13,6 @@ type IUserUseCase interface {
 	GetListUser() ([]response.GetUserResponse, error)
 	DeleteUser(id int) error
 	UpdateUser(id int) error
-
 }
 
 type UserUseCase struct {
@@ -49,6 +48,24 @@ func (u UserUseCase) DeleteUser(id int) error {
 
 	err = u.userRepository.Delete(id)
 	return err
+}
+
+func (services UserUseCase) UpdateUser(userRequest entity.UpdateUserRequest, id int) (response.UserResponse, error) {
+	user, err := services.userRepository.FindById(id)
+
+	if err != nil {
+		return response.UserResponse{}, err
+	}
+
+	copier.CopyWithOption(&user, &userRequest, copier.Option{IgnoreEmpty: true})
+
+	user, err = services.userRepository.Update(user)
+
+	userRes := response.UserResponse{}
+
+	copier.Copy(&userRes, &user)
+
+	return userRes, nil
 }
 
 func (u UserUseCase) GetList() ([]response.GetUserResponse, error) {
